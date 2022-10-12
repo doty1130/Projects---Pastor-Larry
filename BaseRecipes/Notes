@@ -2,6 +2,27 @@ Text file for notes.
 
 //API section
 
-//TODO
+The Meal DB 
+https://themealdb.p.rapidapi.com - API 
+9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c - Key
+themealdb.p.rapidapi.com - Host
 
-// 
+Recipe - Webknox 
+https://webknox-recipes.p.rapidapi.com - API
+9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c - Key
+webknox-recipes.p.rapidapi.com
+
+
+//TODO
+-research prototype pattern for webpages
+
+
+// Database notes
+-research the data structures of the api responses and build tables based on them.
+-Add animation to transition into the search page.
+
+//Current Updates.
+- Added a UML for the client side.
+- Established flex box and code to populate landing page.
+- took out the header and footer to the page. it is not needed for design.
+- researched and recorded API keys and hosts for database filling.

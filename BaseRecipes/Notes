@@ -23,6 +23,7 @@ webknox-recipes.p.rapidapi.com
 // Database notes
 -research the data structures of the api responses and build tables based on them.
 -Add animation to transition into the search page.
+-Determine what the best approach to image storage will be. Database or file management. I am leaning towards the File Managements.
 
 //Current Updates.
 -Added Database. -No Tables yet.

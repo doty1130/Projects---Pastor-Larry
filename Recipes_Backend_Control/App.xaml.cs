@@ -13,5 +13,8 @@ namespace Recipes_Backend_Control
     /// </summary>
     public partial class App : Application
     {
+        private static void Main(string arg)
+        { 
+        }
     }
 }

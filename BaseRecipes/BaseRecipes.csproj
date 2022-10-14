@@ -6,8 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Recipes_Backend_Control\Recipes_Backend_Control.csproj" />
-  </ItemGroup>
-
 </Project>

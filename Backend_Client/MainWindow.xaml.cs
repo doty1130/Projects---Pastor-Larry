@@ -14,24 +14,24 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Recipes_B_Logic;
 
-namespace Recipes_Backend_Control
+namespace Backend_Client
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        API_Actions _Logic = new API_Actions();
+        
+        API_Actions _PopLogic = new API_Actions();
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Run_Propagation(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Task task = _PopLogic.PopulateDataBase();
         }
-
-      
     }
 }

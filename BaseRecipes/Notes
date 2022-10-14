@@ -13,20 +13,24 @@ https://webknox-recipes.p.rapidapi.com - API
 webknox-recipes.p.rapidapi.com
 
 
+//Goal 
+- Data flow starts at wpf populate button >> api get >> Fill data Model Object >> Use data Model Object to fill database table entry.
+
+
 //TODO
--research prototype pattern for webpages
--Build First Database table.
--Begin Logic Libary to fill database from API.
--WPF text box needs details filled in to wire it up.
--Test API Call, Test API Call and upload result into database.
+- research prototype pattern for webpages
+- Build First Database table.
+- WPF text box needs details filled in to wire it up.
+- Based on Data model, i need to create a database table
+- Fill data model with api response.
+-Add animation to transition into the search page.
 
 // Database notes
--research the data structures of the api responses and build tables based on them.
--Add animation to transition into the search page.
--Determine what the best approach to image storage will be. Database or file management. I am leaning towards the File Managements.
+- build tables based on data models.
+- Determine what the best approach to image storage will be. Database or file management. I am leaning towards the File Managements.
 
 //Current Updates.
--Added Database. -No Tables yet.
--Built Front-end for backend code.
--Assigning Dependences: Clients (Web and WPF) to Business Logic. Business Logic to Database.
--Installed RestSharp in Business Logic. I have be unsuccessful in finding the right method to make a basic test call. Httpclient and Restsharp both have there hangups.
+- Successsfuly tested the API.
+- Created Model for the data
+- recreated WPF Project. Made it simply to populate database for now.
+

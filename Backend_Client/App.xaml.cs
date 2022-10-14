@@ -6,16 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Recipes_Backend_Control
+namespace Backend_Client
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        private static int Main()
-        {
-            return 1;
-        }
     }
 }

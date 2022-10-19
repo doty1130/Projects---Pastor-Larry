@@ -23,14 +23,13 @@ webknox-recipes.p.rapidapi.com
 - WPF text box needs details filled in to wire it up.
 - Based on Data model, i need to create a database table
 - Fill data model with api response.
--Add animation to transition into the search page.
+- Add animation to transition into the search page.
 
 // Database notes
-- build tables based on data models.
+- build tables based on data models .
 - Determine what the best approach to image storage will be. Database or file management. I am leaning towards the File Managements.
 
 //Current Updates.
-- Successsfuly tested the API.
-- Created Model for the data
-- recreated WPF Project. Made it simply to populate database for now.
+-Added Newtonsoft.json to Recipes backend Logic.
+-
 

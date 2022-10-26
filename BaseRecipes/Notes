@@ -19,17 +19,21 @@ webknox-recipes.p.rapidapi.com
 
 //TODO
 - research prototype pattern for webpages
-- Build First Database table.
 - WPF text box needs details filled in to wire it up.
 - Based on Data model, i need to create a database table
 - Fill data model with api response.
 - Add animation to transition into the search page.
 
+//Filling Database with API response.- Current Project
+- Filled Model with Json Response
+- Made data table to hold modal
+= working on how to fill database table.
+
 // Database notes
-- build tables based on data models .
 - Determine what the best approach to image storage will be. Database or file management. I am leaning towards the File Managements.
+- Database Connection String :: Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
 
 //Current Updates.
--Added Newtonsoft.json to Recipes backend Logic.
--
+-Fixed json desirealiztion
+-Build and published first database table. Matching with Json object for meals
 

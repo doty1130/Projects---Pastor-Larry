@@ -3,6 +3,7 @@ using System;
 using System.Net.Http;
 using Recipes_B_Logic.Models;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 
 namespace Recipes_B_Logic
@@ -12,9 +13,7 @@ namespace Recipes_B_Logic
     //http client and RestSharp both have limitations.
 	public  class API_Actions
     {
-		//Full meal with Instructions. 
-		Meal? DbModel = new Meal();
-		Root2 DbModel2 = new Root2();
+		
 
 		// Get request is Grabbing Meal plan from ID. 
 
@@ -23,6 +22,7 @@ namespace Recipes_B_Logic
 
 		public async Task PopulateDataBase()
         {
+			//meals? meal = new meals();
 			var client = new HttpClient();
 			var request = new HttpRequestMessage
 			{
@@ -38,38 +38,42 @@ namespace Recipes_B_Logic
 			{
 				response.EnsureSuccessStatusCode();
 				var body = await response.Content.ReadAsStringAsync();
-				Console.WriteLine(body);
-				DbModel = JsonConvert.DeserializeObject<Meal>(body);
+			
+				DeConstructJson(body);
 
-				Console.WriteLine(DbModel);
 
-				Console.WriteLine("struff");
+				
 			}
 
 		}
 
-		public async Task MealLookup()
+
+		public static void DeConstructJson(string body)
 		{
-			var client = new HttpClient();
-			var request = new HttpRequestMessage
+			Root Meals = new Root();
+			try
 			{
-				Method = HttpMethod.Get,
-				RequestUri = new Uri("https://themealdb.p.rapidapi.com/filter.php?i=chicken_breast"),
-				Headers =
-			{
-				{ "X-RapidAPI-Key", "9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c" },
-				{ "X-RapidAPI-Host", "themealdb.p.rapidapi.com" },
-			},
-			};
-			using (var response = await client.SendAsync(request))
-			{
-				response.EnsureSuccessStatusCode();
-				var body = await response.Content.ReadAsStringAsync();
-				DbModel2 = JsonConvert.DeserializeObject<Root2>(body);
+				Meals = JsonConvert.DeserializeObject<Root>(body);
 
-				Console.WriteLine("struff");
+				Debug.Print("Is working");
+
+				UploadToDateBase(Meals.meals[0]);
+
 			}
+			
+			catch(Exception ex)
+			{
+				Debug.Print("We had an issue" + ex.Message.ToString());
+			}
+		}
 
+		public static void UploadToDateBase(Meal meal)
+		{ 
+			 var dbConnection = "Data Source = (localdb)\ProjectModels; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False"
+
+
+			 using (dbConnection connection = factory.CreateConnection())
+				
 		}
 
 

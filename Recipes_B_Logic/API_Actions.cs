@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 
 
+
 namespace Recipes_B_Logic
 {
 	
@@ -18,6 +19,7 @@ namespace Recipes_B_Logic
 		// Get request is Grabbing Meal plan from ID. 
 
 		public int Id = 52772;
+		public DataBase_Actions DataBase = new DataBase_Actions();
 
 
 		public async Task PopulateDataBase()
@@ -39,16 +41,15 @@ namespace Recipes_B_Logic
 				response.EnsureSuccessStatusCode();
 				var body = await response.Content.ReadAsStringAsync();
 			
-				DeConstructJson(body);
+				Meal meal1 = DeConstructJson(body);
 
-
-				
+				DataBase.DataBase_Manager(meal1);
 			}
 
 		}
 
 
-		public static void DeConstructJson(string body)
+		public static Meal DeConstructJson(string body)
 		{
 			Root Meals = new Root();
 			try
@@ -57,29 +58,24 @@ namespace Recipes_B_Logic
 
 				Debug.Print("Is working");
 
-				UploadToDateBase(Meals.meals[0]);
+				Meal meal = Meals.meals[0];
+
+				return meal;
 
 			}
-			
 			catch(Exception ex)
 			{
 				Debug.Print("We had an issue" + ex.Message.ToString());
+				Meal? meal = null;
+				return meal;
 			}
 		}
 
-		public static void UploadToDateBase(Meal meal)
-		{ 
-			 var dbConnection = "Data Source = (localdb)\ProjectModels; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False"
-
-
-			 using (dbConnection connection = factory.CreateConnection())
-				
-		}
-
+	
 
 		/* ToDo with response body
 		 * 
-		 * Fill model. 
+		 * 
 		 * Store Picture in file structure
 		 * use model to fill database table entry,
 		 * 

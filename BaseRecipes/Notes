@@ -13,15 +13,11 @@ https://webknox-recipes.p.rapidapi.com - API
 webknox-recipes.p.rapidapi.com
 
 
-//Goal 
-- Data flow starts at wpf populate button >> api get >> Fill data Model Object >> Use data Model Object to fill database table entry.
 
 
 //TODO
 - research prototype pattern for webpages
 - WPF text box needs details filled in to wire it up.
-- Based on Data model, i need to create a database table
-- Fill data model with api response.
 - Add animation to transition into the search page.
 
 //Filling Database with API response.- Current Project
@@ -29,11 +25,18 @@ webknox-recipes.p.rapidapi.com
 - Made data table to hold modal
 = working on how to fill database table.
 
+//Goals 
+- Data flow starts at wpf populate button >> api get >> Fill data Model Object >> Use data Model Object to fill database table entry.
+-- Data is hitting model
+-- Data is deserializing
+== db connection is bugging out. use try catch to find error details.
+
 // Database notes
 - Determine what the best approach to image storage will be. Database or file management. I am leaning towards the File Managements.
 - Database Connection String :: Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
 
 //Current Updates.
--Fixed json desirealiztion
--Build and published first database table. Matching with Json object for meals
-
+-Created Database connection
+-Connection is throwing exception
+-Created Database manager class Called DataBase_Actions 
+-Made App.Config file and setup the connection xml. Potental bug in that it does not seem to allow database manager to access it. 

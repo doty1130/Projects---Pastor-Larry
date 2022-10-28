@@ -43,7 +43,7 @@ namespace Recipes_B_Logic
 			
 				Meal meal1 = DeConstructJson(body);
 
-				DataBase.DataBase_Manager(meal1);
+				DataBase.DatabaseConnectionTest();
 			}
 
 		}
@@ -56,7 +56,7 @@ namespace Recipes_B_Logic
 			{
 				Meals = JsonConvert.DeserializeObject<Root>(body);
 
-				Debug.Print("Is working");
+		
 
 				Meal meal = Meals.meals[0];
 

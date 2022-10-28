@@ -22,8 +22,8 @@ namespace Backend_Client
     public partial class MainWindow : Window
     {
         
-        API_Actions _PopLogic = new API_Actions();
-
+        API_Actions _CallLogic = new API_Actions();
+       
         public MainWindow()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace Backend_Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Task task = _PopLogic.PopulateDataBase();
+            Task task = _CallLogic.PopulateDataBase();
          
         }
     }

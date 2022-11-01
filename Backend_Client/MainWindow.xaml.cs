@@ -31,8 +31,9 @@ namespace Backend_Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Task task = _CallLogic.PopulateDataBase();
-         
+            Task task = _CallLogic.PopulateDataBaseAtRandom();
+
+
         }
     }
 }

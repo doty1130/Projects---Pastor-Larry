@@ -20,23 +20,29 @@ webknox-recipes.p.rapidapi.com
 - WPF text box needs details filled in to wire it up.
 - Add animation to transition into the search page.
 
-//Filling Database with API response.- Current Project
-- Filled Model with Json Response
-- Made data table to hold modal
-= working on how to fill database table.
+//Filling Database with API response.- Finnished Project.
+
+//Filled WPF with meal data from database. - Current Project 
+
+//Fill Landing Page with meal images. - Next Project
+
+//Develop about to search for a meal. - Second Project
+
+//Develop Webpage to display meal data is a nice way. - Final Project.
 
 //Goals 
-- Data flow starts at wpf populate button >> api get >> Fill data Model Object >> Use data Model Object to fill database table entry.
--- Data is hitting model
--- Data is deserializing
--- db connection is bugging out. Fixed the bug. 
-== DB Commands to fill table are almost built.
+- Reverse Data flow. From Database to Webpage.
+-- Database need to fill model.
+-- Data needs to be displayed on the webpage
+-- Data needs to display on the WFP as well. 
+== Write a stored Procedure to access and return data based on user input.
+
 
 // Database notes
-- Determine what the best approach to image storage will be. Database or file management. I am leaning towards the File Managements.
 - Database Connection String :: Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
 
 //Current Updates.
-- Checked the database connection
-- Worked out the database nonquery's to make database works
-- Built the meal database filling method. Needs to be completed with notes on the file
+- Database is connected.
+- Data from api is being stored in database.
+- random meals are being added at the press of a button.
+-

@@ -21,6 +21,144 @@ namespace Recipes_B_Logic
 
         public void StoreMeal(Meal meal)
         {
+           
+                using (SqlConnection conn = new SqlConnection(_sqlConnection))
+                {
+                    conn.Open();
+
+
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand())
+                        {
+                            cmd.Connection = conn;
+
+                            cmd.CommandText = "RecipesDataBase.dbo.StoreMeal";
+
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            cmd.Parameters.Add(new SqlParameter("@MealId", Convert.ToInt64(meal.idMeal)));
+
+                            cmd.Parameters.Add(new SqlParameter("@MName", meal.strMeal));
+
+                            cmd.Parameters.Add(new SqlParameter("@DrinkAlternate", meal.strDrinkAlternate));
+
+                            cmd.Parameters.Add(new SqlParameter("@Category", meal.strCategory));
+
+                            cmd.Parameters.Add(new SqlParameter("@Area", meal.strArea));
+
+                            cmd.Parameters.Add(new SqlParameter("@Instructions", meal.strInstructions));
+
+                            cmd.Parameters.Add(new SqlParameter("@ThumbNail", meal.strMealThumb));
+
+                            cmd.Parameters.Add(new SqlParameter("@Youtube", meal.strYoutube));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred1", meal.strIngredient1));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred2", meal.strIngredient2));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred3", meal.strIngredient3));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred4", meal.strIngredient4));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred5", meal.strIngredient5));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred6", meal.strIngredient6));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred7", meal.strIngredient7));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred8", meal.strIngredient8));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred9", meal.strIngredient9));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred10", meal.strIngredient10));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred11", meal.strIngredient11));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred12", meal.strIngredient12));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred13", meal.strIngredient13));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred14", meal.strIngredient14));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred15", meal.strIngredient15));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred16", meal.strIngredient16));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred17", meal.strIngredient17));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred18", meal.strIngredient18));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred19", meal.strIngredient19));
+
+                            cmd.Parameters.Add(new SqlParameter("@Ingred20", meal.strIngredient20));
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure1", meal.strMeasure1));
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure2", meal.strMeasure2));
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure3", meal.strMeasure3));
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure4", meal.strMeasure4));
+                         
+                            cmd.Parameters.Add(new SqlParameter("@Measure5", meal.strMeasure5));
+                       
+                            cmd.Parameters.Add(new SqlParameter("@Measure6", meal.strMeasure6));
+                        
+                            cmd.Parameters.Add(new SqlParameter("@Measure7", meal.strMeasure7));
+                         
+                            cmd.Parameters.Add(new SqlParameter("@Measure8", meal.strMeasure8));
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure9", meal.strMeasure9));
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure10", meal.strMeasure10));
+                          
+                            cmd.Parameters.Add(new SqlParameter("@Measure11", meal.strMeasure11));
+                          
+                            cmd.Parameters.Add(new SqlParameter("@Measure12", meal.strMeasure12));
+                          
+                            cmd.Parameters.Add(new SqlParameter("@Measure13", meal.strMeasure13));
+                           
+                            cmd.Parameters.Add(new SqlParameter("@Measure14", meal.strMeasure14));
+                         
+                            cmd.Parameters.Add(new SqlParameter("@Measure15", meal.strMeasure15)); 
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure16", meal.strMeasure16));
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure17", meal.strMeasure17));
+
+                            cmd.Parameters.Add(new SqlParameter("@Measure18", meal.strMeasure18));
+                          
+                            cmd.Parameters.Add(new SqlParameter("@Measure19", meal.strMeasure19));
+                            
+                            cmd.Parameters.Add(new SqlParameter("@Measure20", meal.strMeasure20));
+                            
+                            cmd.Parameters.Add(new SqlParameter("@MSource", meal.strSource));
+
+                            cmd.Parameters.Add(new SqlParameter("@ImageSource", meal.strImageSource));
+
+                            cmd.Parameters.Add(new SqlParameter("@CreativeCommonsConfirmed", meal.strCreativeCommonsConfirmed));
+                        
+
+                           
+
+                            cmd.ExecuteNonQuery();
+                            Debug.Print("Uploaded Meal");
+                        }
+                    }
+                    catch (Exception ex)
+                    { Debug.Print(ex.Message.ToString()); }
+
+                    conn.Close();
+                }
+            
+            
+        }
+
+
+        public bool CheckMealStore(string m_ID)
+        {
+            string databaseName = "";
 
             using (SqlConnection conn = new SqlConnection(_sqlConnection))
             {
@@ -32,21 +170,30 @@ namespace Recipes_B_Logic
                     cmd.CommandText = "USE RecipesDataBase";
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "INSERT INTO MealTable(Id, Name, [Drink Alternate], Category, Area, Instructions, ThumbNail, Youtube, Ingred1, Ingred2, Ingred3, Ingred4, Ingred5, Ingred6, Ingred7, Ingred8, Ingred9, Ingred10, Ingred11, Ingred12 ,Ingred13, Ingred14, Ingred15, Ingred16, Ingred17, Ingred18, Ingred19, Ingred20, Measure1, Measure2, Measure3, Measure4, Measure5, Measure6, Measure7, Measure8, Measure9, Measure10, Measure11, Measure12, Measure13, Measure14, Measure15, Measure16, Measure17, Measure18, Measure19, Measure20, Source, ImageSource, CreativeCommonsConfirmed, dateModified) Value(@Id, @Name, @[Drink Alternate], @Category, @Area, @Instructions, @ThumbNail, @Youtube, @Ingred1, @Ingred2, @Ingred3, @Ingred4, @Ingred5, @Ingred6, @Ingred7, @Ingred8, @Ingred9, @Ingred10, @Ingred11, @Ingred12, @Ingred13, @Ingred14, @Ingred15, @Ingred16, @Ingred17, @Ingred18, @Ingred19, @Ingred20, @Measure1, @Measure2, @Measure3, @Measure4, @Measure5, @Measure6, @Measure7, @Measure8, @Measure9, @Measure10, @Measure11, @Measure12, @Measure13, @Measure14, @Measure15, @Measure16, @Measure17, @Measure18, @Measure19, @Measure20, @Source, @ImageSource, @CreativeCommonsConfirmed, @dateModified)";
+                    cmd.CommandText = "Return 1";
 
 
-                    /*
-                     * Add a Parameter with code in this comment.
-                     * cmd.Parameters.Add("@id", SqlDbType.Int).Value ) = id;
-                     *  cmd.Parameters.Add("@Title", SqlDbType.NVarChar, 40).Value ) = Artist
-                     */
-                    cmd.ExecuteNonQuery();
+                    SqlDataReader dr = cmd.ExecuteReader();
 
+                    while (dr.Read())
+                    {
+                        databaseName = dr[0].ToString();
+                        try { Debug.Print(databaseName); }
+                        catch (Exception ex)
+                        {
+                            Debug.Print(ex.Message.ToString());
+                        }
+
+                    }
                 }
 
                 conn.Close();
             }
+
+            return true;
+
         }
+
 
         public void DatabaseConnectionTest()
         {

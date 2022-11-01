@@ -21,8 +21,65 @@ namespace Recipes_B_Logic
 		public int Id = 52772;
 		public DataBase_Actions DataBase = new DataBase_Actions();
 
+		//Get API Call by Random
+		public async Task PopulateDataBaseAtRandom()
+		{
+			//meals? meal = new meals();
+			var client = new HttpClient();
+			var request = new HttpRequestMessage
+			{
+				Method = HttpMethod.Get,
+				RequestUri = new Uri("https://themealdb.p.rapidapi.com/random.php"),
+				Headers =
+			{
+		{ "X-RapidAPI-Key", "9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c" },
+		{ "X-RapidAPI-Host", "themealdb.p.rapidapi.com" },
+			},
+			};
+			using (var response = await client.SendAsync(request))
+			{
+				response.EnsureSuccessStatusCode();
+				var body = await response.Content.ReadAsStringAsync();
+				
+			
+				Meal meal1 = DeConstructJson(body);
 
-		public async Task PopulateDataBase()
+				DataBase.StoreMeal(meal1);
+				Debug.Print(meal1.strMeal);
+			}
+
+		}
+
+
+		//Get API Call by main ingredent
+		public async Task PopulateDataBaseByIngredent()
+		{
+			//meals? meal = new meals();
+			var client = new HttpClient();
+			var request = new HttpRequestMessage
+			{
+				Method = HttpMethod.Get,
+				//RequestUri = new Uri($"https://themealdb.p.rapidapi.com/lookup.php?i={Id}"),
+				Headers =
+				{
+					{ "X-RapidAPI-Key", "9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c" },
+					{ "X-RapidAPI-Host", "themealdb.p.rapidapi.com" },
+				},
+			};
+			using (var response = await client.SendAsync(request))
+			{
+				response.EnsureSuccessStatusCode();
+				var body = await response.Content.ReadAsStringAsync();
+
+				Meal meal1 = DeConstructJson(body);
+
+				DataBase.StoreMeal(meal1);
+			}
+
+		}
+
+		//Get API Call by id 
+		public async Task PopulateDataBaseID(int Id)
         {
 			//meals? meal = new meals();
 			var client = new HttpClient();
@@ -43,7 +100,7 @@ namespace Recipes_B_Logic
 			
 				Meal meal1 = DeConstructJson(body);
 
-				DataBase.DatabaseConnectionTest();
+				DataBase.StoreMeal(meal1);
 			}
 
 		}

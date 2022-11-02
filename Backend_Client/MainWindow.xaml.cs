@@ -23,10 +23,19 @@ namespace Backend_Client
     {
         
         API_Actions _CallLogic = new API_Actions();
-       
+        DataBase_Actions _DataLogic = new DataBase_Actions();
+
+        //Meal Catagorys list.
+        List<string> cats = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
+
+            cats = _DataLogic.GetCatagory();
+
+            for (int x = 0; x < cats.Count(); x++)
+            { List.Items.Add(cats[x]); }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,5 +44,7 @@ namespace Backend_Client
 
 
         }
+
+       
     }
 }

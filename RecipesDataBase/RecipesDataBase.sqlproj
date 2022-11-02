@@ -60,6 +60,7 @@
   <ItemGroup>
     <Build Include="MealTable.sql" />
     <Build Include="StoreMeal.sql" />
+    <Build Include="ReturnColumn.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="RecipesDataBase.refactorlog" />

@@ -22,7 +22,7 @@ webknox-recipes.p.rapidapi.com
 
 //Filling Database with API response.- Finnished Project.
 
-//Filled WPF with meal data from database. - Current Project 
+//Fill WPF with meal data from database. - Current Project 
 
 //Fill Landing Page with meal images. - Next Project
 
@@ -36,13 +36,13 @@ webknox-recipes.p.rapidapi.com
 -- Data needs to be displayed on the webpage
 -- Data needs to display on the WFP as well. 
 == Write a stored Procedure to access and return data based on user input.
+- finnished combo box, need draw data with category so that all meal names are listed in the display box.
 
 
 // Database notes
 - Database Connection String :: Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
 
 //Current Updates.
-- Database is connected.
-- Data from api is being stored in database.
-- random meals are being added at the press of a button.
--
+- Finnished combo box fill in. 
+- uploaded a dynamic database stored procedures.
+- updated project comments and notes.

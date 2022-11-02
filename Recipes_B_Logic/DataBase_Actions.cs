@@ -15,10 +15,14 @@ namespace Recipes_B_Logic
     public class DataBase_Actions
     {
 
-        
+        /*
+        Connection String for database
+        */
         string _sqlConnection = @"Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-
+        /*
+         Uploads meal data from api into the database.
+        */
         public void StoreMeal(Meal meal)
         {
            
@@ -155,46 +159,9 @@ namespace Recipes_B_Logic
             
         }
 
-
-        public bool CheckMealStore(string m_ID)
-        {
-            string databaseName = "";
-
-            using (SqlConnection conn = new SqlConnection(_sqlConnection))
-            {
-                conn.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.Connection = conn;
-                    cmd.CommandText = "USE RecipesDataBase";
-                    cmd.ExecuteNonQuery();
-
-                    cmd.CommandText = "Return 1";
-
-
-                    SqlDataReader dr = cmd.ExecuteReader();
-
-                    while (dr.Read())
-                    {
-                        databaseName = dr[0].ToString();
-                        try { Debug.Print(databaseName); }
-                        catch (Exception ex)
-                        {
-                            Debug.Print(ex.Message.ToString());
-                        }
-
-                    }
-                }
-
-                conn.Close();
-            }
-
-            return true;
-
-        }
-
-
+        /*
+       Test database connection. Example code. Will remove 
+        */
         public void DatabaseConnectionTest()
         {
             string databaseName = "";
@@ -230,57 +197,67 @@ namespace Recipes_B_Logic
             }
         }
 
+        /*
+            returns a list of meal categories. 
+            Sorts categories, removes duplicates and nulls. returns unique values
+            uses dynamic sql to get the right column data. 
+            Goal: will convert sorting algorithm to sql variation
+        */
+        public List<string> GetCatagory()
+        { 
+            List<string> CategoryList = new List<string>();
+
+                using (SqlConnection conn = new SqlConnection(_sqlConnection))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = "RecipesDataBase.dbo.ReturnColumn";
+
+                    cmd.Parameters.Add(new SqlParameter("@Column", "Category"));
+                    cmd.Parameters.Add(new SqlParameter("@Table", "MealTable"));
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                           CategoryList.Add(dr[0].ToString());
+                        }
+                    }
+
+                    conn.Close();
+                }
+
+
+            /*
+			Algorithm used to clean data. 
+            returns no nulls, returns only one instance of each category
+		    */
+            CategoryList.Sort();
+            if (CategoryList.Contains("null"))
+                CategoryList.Remove("null");
+
+            List<string> returnList = new List<string>();
+
+            foreach (string category in CategoryList)
+                 {
+                if (!returnList.Contains(category))
+                {
+                    returnList.Add(category);
+                }
+                else
+                    continue;
+                 }    
+
+                return returnList;
+        }
+
+         
     }
+
 }
-
-
-
-        //public void DataBase_Manager(Meal meal)
-        //{
-
-        //    string? provider = ConfigurationManager.AppSettings["provider"];
-
-        //    string? connectionString = ConfigurationManager.AppSettings["ConnectionString"];
-           
-
-        //    //try and catch here to find out why the following code is throughing the exception;
-
-        //      DbProviderFactory factory = DbProviderFactories.GetFactory(provider);
-
-
-        //        using (DbConnection? connection = factory.CreateConnection())
-        //        {
-        //            if (connection == null)
-        //            {
-        //                //Console.WriteLine("Connection Error");
-        //                //Console.ReadLine();
-
-        //                Debug.Print("DB Connection null");
-        //                return;
-        //            }
-
-        //            connection.ConnectionString = connectionString;
-
-        //            connection.Open();
-
-        //            DbCommand? command = factory.CreateCommand();
-
-        //            if (command == null)
-        //            {
-        //                //Console.WriteLine("Command Error");
-        //                //Console.ReadLine();
-
-        //                Debug.Print("DB Command null");
-        //                return;
-        //            }
-
-        //            command.Connection = connection;
-
-        //            command.CommandText = "Select * from ";
-        //        }
-        //    }
-        //}
-
-    
-    
 

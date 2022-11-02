@@ -7,8 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="Populate Database Check" HorizontalAlignment="Left" Height="26" Margin="75,42,0,0" VerticalAlignment="Top" Width="200"/>
-        <Button Content="PopulateData" HorizontalAlignment="Left" Height="30" Margin="75,73,0,0" VerticalAlignment="Top" Width="147" Click="Button_Click"/>
+        <Label Content="Populate Database Check" HorizontalAlignment="Left" Height="26" Margin="439,36,0,0" VerticalAlignment="Top" Width="200"/>
+        <Button Content="PopulateData" HorizontalAlignment="Left" Height="30" Margin="97,68,0,0" VerticalAlignment="Top" Width="147" Click="Button_Click"/>
+        <ComboBox Name ="List" HorizontalAlignment="Left" Height="26" Margin="613,67,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Button Content="Find Meals" HorizontalAlignment="Left" Height="25" Margin="460,68,0,0" VerticalAlignment="Top" Width="114"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="400,108,10,10"/>
+        <Label Content="Catagory" HorizontalAlignment="Left" Margin="644,36,0,0" VerticalAlignment="Top"/>
+        <Label Content="Populate Database With Random Data" HorizontalAlignment="Left" Margin="64,36,0,0" VerticalAlignment="Top"/>
 
 
     </Grid>

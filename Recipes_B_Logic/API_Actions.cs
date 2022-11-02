@@ -9,22 +9,21 @@ using System.Diagnostics;
 
 namespace Recipes_B_Logic
 {
-	
-    //Attempting to determine what is the best api request techneic for this set up.
-    //http client and RestSharp both have limitations.
+	/*
+    Using httpclient to draw in data from api.
+	*/
 	public  class API_Actions
     {
+
+		/*
+		Get request is Grabbing Meal plan from ID. 
+		*/
 		
-
-		// Get request is Grabbing Meal plan from ID. 
-
-		public int Id = 52772;
 		public DataBase_Actions DataBase = new DataBase_Actions();
 
 		//Get API Call by Random
 		public async Task PopulateDataBaseAtRandom()
 		{
-			//meals? meal = new meals();
 			var client = new HttpClient();
 			var request = new HttpRequestMessage
 			{
@@ -50,16 +49,18 @@ namespace Recipes_B_Logic
 
 		}
 
-
-		//Get API Call by main ingredent
-		public async Task PopulateDataBaseByIngredent()
+		/*
+			Get API Call by meal category
+		*/
+		
+		public async Task PopulateDataBaseByCategory(string cat)
 		{
-			//meals? meal = new meals();
+			
 			var client = new HttpClient();
 			var request = new HttpRequestMessage
 			{
 				Method = HttpMethod.Get,
-				//RequestUri = new Uri($"https://themealdb.p.rapidapi.com/lookup.php?i={Id}"),
+				RequestUri = new Uri($"https://themealdb.p.rapidapi.com/filter.php?c={cat}"),
 				Headers =
 				{
 					{ "X-RapidAPI-Key", "9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c" },
@@ -78,7 +79,9 @@ namespace Recipes_B_Logic
 
 		}
 
-		//Get API Call by id 
+		/*
+			Get API Call by id
+		*/
 		public async Task PopulateDataBaseID(int Id)
         {
 			//meals? meal = new meals();
@@ -105,6 +108,9 @@ namespace Recipes_B_Logic
 
 		}
 
+		/*
+			Process the api data into the meal model
+		*/
 
 		public static Meal DeConstructJson(string body)
 		{
@@ -134,7 +140,7 @@ namespace Recipes_B_Logic
 		 * 
 		 * 
 		 * Store Picture in file structure
-		 * use model to fill database table entry,
+		 *
 		 * 
 		 */
 

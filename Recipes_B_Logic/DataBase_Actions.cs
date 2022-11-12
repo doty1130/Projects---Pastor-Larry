@@ -256,7 +256,96 @@ namespace Recipes_B_Logic
                 return returnList;
         }
 
-         
+        /*
+           returns a list of meals by Selected category. 
+       */
+        public List<Meal> GetMealsByCat(string cat)
+        { 
+            List<Meal> meals = new List<Meal>();
+
+            using (SqlConnection conn = new SqlConnection(_sqlConnection))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = "RecipesDataBase.dbo.ReturnMealsByCat";
+
+                    cmd.Parameters.Add(new SqlParameter("@Cat", cat));
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                       Meal meal = new Meal();
+                       meal.idMeal = dr[1].ToString();
+                       meal.strMeal = dr[2].ToString();
+                       meal.strDrinkAlternate = dr[3].ToString();
+                       meal.strCategory = dr[4].ToString();
+                        meal.strInstructions = dr[5].ToString();
+                        meal.strMealThumb = dr[6].ToString();
+                        meal.strYoutube = dr[7].ToString();
+                        meal.strIngredient1 = dr[8].ToString();
+                        meal.strIngredient2 = dr[9].ToString();
+                        meal.strIngredient3 = dr[10].ToString();
+                        meal.strIngredient4 = dr[11].ToString();
+                        meal.strIngredient5 = dr[12].ToString();
+                        meal.strIngredient6 = dr[13].ToString();
+                        meal.strIngredient7 = dr[14].ToString();
+                        meal.strIngredient8 = dr[15].ToString();
+                        meal.strIngredient9 = dr[16].ToString();
+                        meal.strIngredient10 = dr[17].ToString();
+                        meal.strIngredient11 = dr[18].ToString();
+                        meal.strIngredient12 = dr[19].ToString();
+                        meal.strIngredient13 = dr[20].ToString();
+                        meal.strIngredient14 = dr[21].ToString();
+
+                        meal.strIngredient15 = dr[22].ToString();
+                        meal.strIngredient16 = dr[23].ToString();
+                        meal.strIngredient17 = dr[24].ToString();
+                        meal.strIngredient18 = dr[25].ToString();
+                        meal.strIngredient19 = dr[26].ToString();
+                        meal.strIngredient20 = dr[27].ToString();
+                        meal.strMeasure1 = dr[28].ToString();
+                        meal.strMeasure2 = dr[29].ToString();
+                        meal.strMeasure3 = dr[30].ToString();
+                        meal.strMeasure4 = dr[31].ToString(); 
+                        
+                        meal.strMeasure5 = dr[32].ToString();
+                        meal.strMeasure6 = dr[33].ToString(); 
+                        meal.strMeasure7 = dr[34].ToString();
+                        meal.strMeasure8 = dr[35].ToString();
+                        meal.strMeasure9 = dr[36].ToString();
+                        meal.strMeasure10 = dr[37].ToString();
+                        meal.strMeasure11 = dr[38].ToString();
+                        meal.strMeasure12 = dr[39].ToString();
+                        meal.strMeasure13 = dr[40].ToString();
+                        meal.strMeasure14 = dr[41].ToString();
+                        meal.strMeasure15 = dr[42].ToString();
+                        meal.strMeasure16 = dr[43].ToString();
+                        meal.strMeasure17 = dr[44].ToString();
+                        meal.strMeasure18 = dr[45].ToString();
+                        meal.strMeasure19 = dr[46].ToString();
+                        meal.strMeasure20 = dr[47].ToString();
+                        meal.strSource = dr[48].ToString();
+                        meal.strImageSource = dr[49].ToString();
+                        meal.strCreativeCommonsConfirmed = dr[50].ToString();
+                        meal.dateModified = dr[51].ToString();
+                     
+                        meals.Add(meal);
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return meals;
+        }
+
     }
 
 }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Recipes_B_Logic;
+using Recipes_B_Logic.Models;
 
 namespace Backend_Client
 {
@@ -27,6 +28,7 @@ namespace Backend_Client
 
         //Meal Catagorys list.
         List<string> cats = new List<string>();
+        List<Meal> Meals = new List<Meal>();
         public MainWindow()
         {
             InitializeComponent();
@@ -34,17 +36,47 @@ namespace Backend_Client
             cats = _DataLogic.GetCatagory();
 
             for (int x = 0; x < cats.Count(); x++)
-            { List.Items.Add(cats[x]); }
+            { CatSelect.Items.Add(cats[x]); }
 
+            
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Task task = _CallLogic.PopulateDataBaseAtRandom();
 
+            int i = Convert.ToInt32(NumberPopulate.Text);
+
+            for (int a = 0; a < i; a++)
+            {
+                Task task = _CallLogic.PopulateDataBaseAtRandom();
+            }
 
         }
 
-       
+        /*
+         * Fills Listbox with data from the database.
+         * Results are based on the Category you select from the drop down.
+         */
+
+        private void Fill_FromCat(object sender, RoutedEventArgs e)
+        {
+           
+            List<string> MealNames = new List<string>();
+            MealNames.Clear();
+            Meals.Clear();
+            Meals.AddRange(_DataLogic.GetMealsByCat(this.CatSelect.Text.ToString()));
+           
+            foreach (Meal meal in Meals)
+            {
+                MealNames.Add(meal.strMeal);
+            }
+
+            MealList.ItemsSource = null;
+            MealList.Items.Clear();
+            MealList.ItemsSource = MealNames;
+        }
+
+
     }
 }

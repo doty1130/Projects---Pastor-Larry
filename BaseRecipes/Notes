@@ -43,6 +43,7 @@ webknox-recipes.p.rapidapi.com
 - Database Connection String :: Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
 
 //Current Updates.
-- Finnished combo box fill in. 
-- uploaded a dynamic database stored procedures.
-- updated project comments and notes.
+- Updated the Random meal api fetch. 
+- Created the call to the database that fills in the listbox on the client backin
+- Made a stored procedure that fetches the data for the client backin listbox
+

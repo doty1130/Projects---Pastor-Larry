@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Recipes_B_Logic\Recipes_B_Logic.csproj" />
+  </ItemGroup>
+
 </Project>

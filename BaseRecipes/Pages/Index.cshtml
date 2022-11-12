@@ -3,15 +3,14 @@
 @{
     ViewData["Title"] = "Home page";
     string[] ClassObj = new string[]{"Recipe-Image", "Recipe-Image1", "Recipe-Image2" };
+    List<string> thumbnails = Model.GetRecipeThumbs();
+    
     
 }
 
 <div class = "body-Filler">
-    @*Populate background blocks to hold landing page data from database*@
-    @for (int i = 0; i < 25; i++)
-    {
-            @*populate class with string found in classobj*@ 
-            <div class = @ClassObj[Model.randomNumberSelector(0,3)]></div>
-      
-    }
+  <form>
+  <label> Look Up Food</label><br>
+  <></>
+</form>
 </div>

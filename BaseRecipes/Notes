@@ -12,7 +12,10 @@ https://webknox-recipes.p.rapidapi.com - API
 9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c - Key
 webknox-recipes.p.rapidapi.com
 
-
+RecipeAPI
+https://rapidapi.com/Hrishi1999/api/recipesapi2/
+9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c
+recipesapi2.p.rapidapi.com
 
 
 //TODO
@@ -41,9 +44,12 @@ webknox-recipes.p.rapidapi.com
 
 // Database notes
 - Database Connection String :: Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+- Made 6 tables for the new data model.
 
 //Current Updates.
-- Updated the Random meal api fetch. 
-- Created the call to the database that fills in the listbox on the client backin
-- Made a stored procedure that fetches the data for the client backin listbox
+- Changed API, Gutted functions
+- Adding 6 tables to match the data model
+- Check the data pull to the new api. 
+- Made the uri string dynamic and changable based on user imput.
 
+Note: Original Database image uri's are not functioning properly. they are defunct and pulled 404 errors.

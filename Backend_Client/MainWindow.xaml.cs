@@ -27,18 +27,12 @@ namespace Backend_Client
         DataBase_Actions _DataLogic = new DataBase_Actions();
 
         //Meal Catagorys list.
-        List<string> cats = new List<string>();
-        List<Meal> Meals = new List<Meal>();
+       
+        List<Datum> Meals = new List<Datum>();
         public MainWindow()
         {
             InitializeComponent();
-
-            cats = _DataLogic.GetCatagory();
-
-            for (int x = 0; x < cats.Count(); x++)
-            { CatSelect.Items.Add(cats[x]); }
-
-            
+  
            
         }
 
@@ -49,34 +43,9 @@ namespace Backend_Client
 
             for (int a = 0; a < i; a++)
             {
-                Task task = _CallLogic.PopulateDataBaseAtRandom();
+                Task task = _CallLogic.PopulateDataBase("Tomato Soup", 10);
             }
 
         }
-
-        /*
-         * Fills Listbox with data from the database.
-         * Results are based on the Category you select from the drop down.
-         */
-
-        private void Fill_FromCat(object sender, RoutedEventArgs e)
-        {
-           
-            List<string> MealNames = new List<string>();
-            MealNames.Clear();
-            Meals.Clear();
-            Meals.AddRange(_DataLogic.GetMealsByCat(this.CatSelect.Text.ToString()));
-           
-            foreach (Meal meal in Meals)
-            {
-                MealNames.Add(meal.strMeal);
-            }
-
-            MealList.ItemsSource = null;
-            MealList.Items.Clear();
-            MealList.ItemsSource = MealNames;
-        }
-
-
     }
 }

@@ -23,8 +23,6 @@ namespace Recipes_B_Logic
         
            public void StoreDatum(Datum datum)
            {
-            
-
                 using (SqlConnection conn = new SqlConnection(_sqlConnection))
                 {
                     conn.Open();
@@ -36,11 +34,18 @@ namespace Recipes_B_Logic
                         {
                             cmd.Connection = conn;
 
-                            cmd.CommandText = "RecipesDataBase.dbo.StoreMeal";
+                            cmd.CommandText = "RecipesDataBase.dbo.StoreDatum";
 
                             cmd.CommandType = CommandType.StoredProcedure;
 
-                          
+                            cmd.Parameters.Add(new SqlParameter("@name", datum.name));
+                            cmd.Parameters.Add(new SqlParameter("@IngredTable", StoreIngred(datum)));
+                            cmd.Parameters.Add(new SqlParameter("@InstruTable", StoreInstruct(datum)));
+                            cmd.Parameters.Add(new SqlParameter("@nutrientsTable", StoreNutrients(datum)));
+                            cmd.Parameters.Add(new SqlParameter("@tagsTable", StoreTags(datum)));
+                            cmd.Parameters.Add(new SqlParameter("@Servings", datum.servings));
+                            cmd.Parameters.Add(new SqlParameter("@image", datum.image));
+                            cmd.Parameters.Add(new SqlParameter("@timeTable", StoreTime(datum)));
 
                             cmd.ExecuteNonQuery();
                             Debug.Print("Uploaded Meal");
@@ -51,11 +56,210 @@ namespace Recipes_B_Logic
 
                     conn.Close();
                 }
-
-
-            
-
             }
+
+           public int StoreIngred(Datum datum)
+                 {
+                    int index;
+                    using (SqlConnection conn = new SqlConnection(_sqlConnection))
+                    {
+                        conn.Open();
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand())
+                            {
+                                cmd.Connection = conn;
+
+                                cmd.CommandText = "RecipesDataBase.dbo.ingredientsTable";
+
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+                                  
+
+                        index = cmd.ExecuteNonQuery();
+                                Debug.Print("Uploaded ingredients");
+                                conn.Close();
+                                return index;
+                            }
+                        }
+                        catch (Exception ex)
+                        { 
+                        Debug.Print(ex.Message.ToString());
+                        return 0;
+                        }
+                    }
+                }
+
+           public int StoreInstruct(Datum datum)
+             {
+
+                int index;
+                using (SqlConnection conn = new SqlConnection(_sqlConnection))
+                {
+                    conn.Open();
+
+
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand())
+                            {
+                                cmd.Connection = conn;
+
+                                cmd.CommandText = "RecipesDataBase.dbo.InstructionsTable";
+
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                                for (int x = 0; x < datum.instructions.Count; x++)
+                                { cmd.Parameters.Add(new SqlParameter($"@item{x.ToString()}", datum.instructions[x])); }
+                       
+
+
+                                index = cmd.ExecuteNonQuery();
+                                Debug.Print("Uploaded instructions");
+                                conn.Close();
+                                return index;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.Print(ex.Message.ToString());
+                            return 0;
+                        }
+                }
+            }
+
+           public int StoreNutrients(Datum datum)
+                {
+
+                    int index;
+                    using (SqlConnection conn = new SqlConnection(_sqlConnection))
+                    {
+                        conn.Open();
+
+
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand())
+                            {
+                                cmd.Connection = conn;
+
+                                cmd.CommandText = "RecipesDataBase.dbo.NutrientsTable";
+
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+                                cmd.Parameters.Add(new SqlParameter("@protein", datum.nutrients.protein));
+                                cmd.Parameters.Add(new SqlParameter("@carbohydrates", datum.nutrients.carbohydrates));
+                                cmd.Parameters.Add(new SqlParameter("@dietaryfiber", datum.nutrients.dietaryfiber));
+                                cmd.Parameters.Add(new SqlParameter("@sugars", datum.nutrients.sugars));
+                                cmd.Parameters.Add(new SqlParameter("@fat", datum.nutrients.fat));
+                                cmd.Parameters.Add(new SqlParameter("@saturatedfat", datum.nutrients.saturatedfat));
+                                cmd.Parameters.Add(new SqlParameter("@vitaminaiu", datum.nutrients.vitaminaiu));
+                                cmd.Parameters.Add(new SqlParameter("@niacinequivalents", datum.nutrients.niacinequivalents));
+                                cmd.Parameters.Add(new SqlParameter("@vitaminb6", datum.nutrients.vitaminb6));
+                                cmd.Parameters.Add(new SqlParameter("@vitaminc", datum.nutrients.vitaminc));
+                                cmd.Parameters.Add(new SqlParameter("@folate", datum.nutrients.folate));
+                                cmd.Parameters.Add(new SqlParameter("@calcium", datum.nutrients.calcium));
+                                cmd.Parameters.Add(new SqlParameter("@iron", datum.nutrients.iron));
+                                cmd.Parameters.Add(new SqlParameter("@magnesium", datum.nutrients.magnesium));
+                                cmd.Parameters.Add(new SqlParameter("@potassium", datum.nutrients.potassium));
+                                cmd.Parameters.Add(new SqlParameter("@sodium", datum.nutrients.sodium));
+                                cmd.Parameters.Add(new SqlParameter("@thiamin", datum.nutrients.thiamin));
+                                cmd.Parameters.Add(new SqlParameter("@caloriesfromfat", datum.nutrients.caloriesfromfat));
+                                cmd.Parameters.Add(new SqlParameter("@cholesterol", datum.nutrients.cholesterol));
+
+                                index = cmd.ExecuteNonQuery();
+                                Debug.Print("Uploaded Nutrients");
+                                conn.Close();
+                                return index;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.Print(ex.Message.ToString());
+                            return 0;
+                        }
+                    }
+                }
+
+           public int StoreTags(Datum datum)
+                {
+                    int index;
+                    using (SqlConnection conn = new SqlConnection(_sqlConnection))
+                    {
+                        conn.Open();
+
+
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand())
+                            {
+                                cmd.Connection = conn;
+
+                                cmd.CommandText = "RecipesDataBase.dbo.TagsTable";
+
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                                for (int x = 0; x < datum.tags.Count; x++)
+                                { cmd.Parameters.Add(new SqlParameter($"@item{x.ToString()}", datum.tags[x])); }
+
+
+
+                                index = cmd.ExecuteNonQuery();
+                                Debug.Print("Uploaded Tags");
+                                conn.Close();
+                                return index;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.Print(ex.Message.ToString());
+                            return 0;
+                        }
+                    }
+                }
+
+           public int StoreTime(Datum datum)
+                {
+
+                    int index;
+                    using (SqlConnection conn = new SqlConnection(_sqlConnection))
+                    {
+                        conn.Open();
+
+
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand())
+                            {
+                                cmd.Connection = conn;
+
+                                cmd.CommandText = "RecipesDataBase.dbo.TimeTable";
+
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                                cmd.Parameters.Add(new SqlParameter("@prepration_time", datum.time.prepration_time));
+                                cmd.Parameters.Add(new SqlParameter("@cooking_time", datum.time.cooking_time));
+                                cmd.Parameters.Add(new SqlParameter("@additional_time", datum.time.additional_time));
+                                cmd.Parameters.Add(new SqlParameter("@total", datum.time.total));
+
+
+
+                                index = cmd.ExecuteNonQuery();
+                                Debug.Print("Uploaded Times");
+                                conn.Close();
+                                return index;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.Print(ex.Message.ToString());
+                            return 0;
+                        }
+                    }
+                }
 
 
         //OLD Database FUNCTIONs Totally defunct

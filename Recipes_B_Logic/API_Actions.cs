@@ -43,6 +43,7 @@ namespace Recipes_B_Logic
            
                 Datum meal1 = DeConstructJson(body);
                 Debug.Print(meal1.name);
+                DataBase.StoreDatum(meal1);
             }
 
         }

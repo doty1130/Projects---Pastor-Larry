@@ -20,7 +20,9 @@ namespace Recipes_B_Logic
        */
         string _sqlConnection = @"Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        
+        //try to upload arrays into a comma seperated string instead of using seperate tables.
+        //write method to return strings from arrays of strings. 
+        // and method to return arrays of strings from a comma seperated string.
            public void StoreDatum(Datum datum)
            {
                 using (SqlConnection conn = new SqlConnection(_sqlConnection))
@@ -39,10 +41,10 @@ namespace Recipes_B_Logic
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             cmd.Parameters.Add(new SqlParameter("@name", datum.name));
-                            cmd.Parameters.Add(new SqlParameter("@IngredTable", StoreIngred(datum)));
-                            cmd.Parameters.Add(new SqlParameter("@InstruTable", StoreInstruct(datum)));
+                            cmd.Parameters.Add(new SqlParameter("@IngredTable", StringJoin(datum.ingredients)));
+                            cmd.Parameters.Add(new SqlParameter("@InstruTable", StringJoin(datum.instructions)));
                             cmd.Parameters.Add(new SqlParameter("@nutrientsTable", StoreNutrients(datum)));
-                            cmd.Parameters.Add(new SqlParameter("@tagsTable", StoreTags(datum)));
+                            cmd.Parameters.Add(new SqlParameter("@tagsTable", ObjectJoin(datum.tags)));
                             cmd.Parameters.Add(new SqlParameter("@Servings", datum.servings));
                             cmd.Parameters.Add(new SqlParameter("@image", datum.image));
                             cmd.Parameters.Add(new SqlParameter("@timeTable", StoreTime(datum)));
@@ -57,78 +59,7 @@ namespace Recipes_B_Logic
                     conn.Close();
                 }
             }
-
-           public int StoreIngred(Datum datum)
-                 {
-                    int index;
-                    using (SqlConnection conn = new SqlConnection(_sqlConnection))
-                    {
-                        conn.Open();
-                        try
-                        {
-                            using (SqlCommand cmd = new SqlCommand())
-                            {
-                                cmd.Connection = conn;
-
-                                cmd.CommandText = "RecipesDataBase.dbo.ingredientsTable";
-
-                                cmd.CommandType = CommandType.StoredProcedure;
-
-                                  
-
-                        index = cmd.ExecuteNonQuery();
-                                Debug.Print("Uploaded ingredients");
-                                conn.Close();
-                                return index;
-                            }
-                        }
-                        catch (Exception ex)
-                        { 
-                        Debug.Print(ex.Message.ToString());
-                        return 0;
-                        }
-                    }
-                }
-
-           public int StoreInstruct(Datum datum)
-             {
-
-                int index;
-                using (SqlConnection conn = new SqlConnection(_sqlConnection))
-                {
-                    conn.Open();
-
-
-                        try
-                        {
-                            using (SqlCommand cmd = new SqlCommand())
-                            {
-                                cmd.Connection = conn;
-
-                                cmd.CommandText = "RecipesDataBase.dbo.InstructionsTable";
-
-                                cmd.CommandType = CommandType.StoredProcedure;
-
-
-                                for (int x = 0; x < datum.instructions.Count; x++)
-                                { cmd.Parameters.Add(new SqlParameter($"@item{x.ToString()}", datum.instructions[x])); }
-                       
-
-
-                                index = cmd.ExecuteNonQuery();
-                                Debug.Print("Uploaded instructions");
-                                conn.Close();
-                                return index;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.Print(ex.Message.ToString());
-                            return 0;
-                        }
-                }
-            }
-
+           
            public int StoreNutrients(Datum datum)
                 {
 
@@ -136,8 +67,6 @@ namespace Recipes_B_Logic
                     using (SqlConnection conn = new SqlConnection(_sqlConnection))
                     {
                         conn.Open();
-
-
                         try
                         {
                             using (SqlCommand cmd = new SqlCommand())
@@ -182,57 +111,20 @@ namespace Recipes_B_Logic
                     }
                 }
 
-           public int StoreTags(Datum datum)
-                {
-                    int index;
-                    using (SqlConnection conn = new SqlConnection(_sqlConnection))
-                    {
-                        conn.Open();
-
-
-                        try
-                        {
-                            using (SqlCommand cmd = new SqlCommand())
-                            {
-                                cmd.Connection = conn;
-
-                                cmd.CommandText = "RecipesDataBase.dbo.TagsTable";
-
-                                cmd.CommandType = CommandType.StoredProcedure;
-
-
-                                for (int x = 0; x < datum.tags.Count; x++)
-                                { cmd.Parameters.Add(new SqlParameter($"@item{x.ToString()}", datum.tags[x])); }
-
-
-
-                                index = cmd.ExecuteNonQuery();
-                                Debug.Print("Uploaded Tags");
-                                conn.Close();
-                                return index;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.Print(ex.Message.ToString());
-                            return 0;
-                        }
-                    }
-                }
 
            public int StoreTime(Datum datum)
-                {
+           {
 
-                    int index;
-                    using (SqlConnection conn = new SqlConnection(_sqlConnection))
-                    {
-                        conn.Open();
+              int index;
+              using (SqlConnection conn = new SqlConnection(_sqlConnection))
+              {
+                  conn.Open();
 
 
-                        try
-                        {
-                            using (SqlCommand cmd = new SqlCommand())
-                            {
+                   try
+                   {
+                         using (SqlCommand cmd = new SqlCommand())
+                         {
                                 cmd.Connection = conn;
 
                                 cmd.CommandText = "RecipesDataBase.dbo.TimeTable";
@@ -251,16 +143,31 @@ namespace Recipes_B_Logic
                                 Debug.Print("Uploaded Times");
                                 conn.Close();
                                 return index;
-                            }
-                        }
+                         }
+                   }
                         catch (Exception ex)
                         {
                             Debug.Print(ex.Message.ToString());
                             return 0;
                         }
                     }
-                }
+           }
 
+        public string StringJoin(List<string> list)
+        {
+            string rString = "";
+            string[] strg = list.ToArray();
+            rString = String.Join(",", strg);
+            return rString;
+        }
+
+        public string ObjectJoin(List<Object> list)
+        {
+            string rString = "";
+            Object[] objs = list.ToArray();
+            rString = String.Join(",", objs);
+            return rString;
+        }
 
         //OLD Database FUNCTIONs Totally defunct
 

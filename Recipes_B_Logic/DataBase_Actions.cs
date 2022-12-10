@@ -18,7 +18,7 @@ namespace Recipes_B_Logic
         /*
        Connection String for database
        */
-        string _sqlConnection = @"Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string _sqlConnection = @"Removed";
 
         //try to upload arrays into a comma seperated string instead of using seperate tables.
         //write method to return strings from arrays of strings. 
@@ -174,7 +174,7 @@ namespace Recipes_B_Logic
         //     /*
         //     Connection String for database
         //     */
-        //     string _sqlConnection = @"Data Source=(localdb)\ProjectModels;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //     string _sqlConnection = @"
 
         //     /*
         //      Uploads meal data from api into the database.

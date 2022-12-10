@@ -32,7 +32,7 @@ namespace Recipes_B_Logic
                 RequestUri = new Uri(string.Format("https://recipesapi2.p.rapidapi.com/recipes/{0}?maxRecipes={1}", HttpUtility.HtmlAttributeEncode(RecipeName), MaxRecipes)),
                 Headers =
                 {
-                    { "X-RapidAPI-Key", "9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c" },
+                    { "X-RapidAPI-Key", ".....Removed" },
                     { "X-RapidAPI-Host", "recipesapi2.p.rapidapi.com" },
                 },
             };
@@ -90,8 +90,7 @@ namespace Recipes_B_Logic
         //		RequestUri = new Uri($"")
         //		Headers =
         //		{
-        //			{ "X-RapidAPI-Key", "9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c" },
-        //			{ "X-RapidAPI-Host", "themealdb.p.rapidapi.com" },
+        //			
         //		},
         //	};
         //	using (var response = await client.SendAsync(request))
@@ -119,9 +118,7 @@ namespace Recipes_B_Logic
         //	
         //		Headers =
         //		{
-        //			{ "X-RapidAPI-Key", "9605ae55aamshc6b245b73128cf1p111fcejsn541111c3085c" },
-        //			{ "X-RapidAPI-Host", "themealdb.p.rapidapi.com" },
-        //		},
+        //			}
         //	};
         //	using (var response = await client.SendAsync(request))
         //	{
